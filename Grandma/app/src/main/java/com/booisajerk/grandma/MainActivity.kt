@@ -5,7 +5,6 @@ import android.util.Log
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerView
 import kotlinx.android.synthetic.main.main_activity.*
 
 
@@ -33,7 +32,6 @@ class MainActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener 
         player?.setPlaybackEventListener(playbackEventListener)
         if (!playerRestored) {
             player?.cueVideo(Config.YOUTUBE_VIDEO_ID)
-            player?.play()
         }
     }
 
@@ -41,8 +39,8 @@ class MainActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener 
         provider: YouTubePlayer.Provider?,
         youTubeInitializationResult: YouTubeInitializationResult
     ) {
-        if (youTubeInitializationResult?.isUserRecoverableError) {
-            youTubeInitializationResult?.getErrorDialog(this, REQUEST_CODE).show()
+        if (youTubeInitializationResult.isUserRecoverableError) {
+            youTubeInitializationResult.getErrorDialog(this, REQUEST_CODE).show()
 
         } else {
             Log.e(
